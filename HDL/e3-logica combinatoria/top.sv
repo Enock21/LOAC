@@ -89,7 +89,7 @@ module top(input  logic clk_2,
 
 
   //---------------------------------------------------------
-  // Exercício 2 - UMA AGÊNCIA BANCÁRIA
+  // Exercício 2 - AGÊNCIA BANCÁRIA
   //---------------------------------------------------------
 
   //Declarando variáveis de entrada
@@ -116,6 +116,37 @@ module top(input  logic clk_2,
           alarme <= 1;
     else alarme <= 0;
 
-  //Ou seja, o segmento 0 será ativado se e somente se ao menos uma das seguintes combinações ocorrer: SWI[0] = 1 e SWI[2] = 1; ou SWI[0] = 1 e SWI[1] = 0.
+  //Ou seja, o segmento 0 (alarme) será ativado se e somente se ao menos uma das seguintes combinações ocorrer: SWI[0] = 1 e SWI[2] = 1; ou SWI[0] = 1 e SWI[1] = 0.
+
+
+  //---------------------------------------------------------
+  // Exercício 3 - ESTUFA
+  //---------------------------------------------------------
+
+  //Declarando variáveis de entrada
+  logic t1, t2;
+
+  //Declarando variáveis de saída
+  logic aquecedor, resfriador, inconsistencia;
+
+  //Conexões de entrada
+  always_comb begin
+    t1 <= SWI[3];
+    t2 <= SWI[4];
+  end
+
+  //Conexões de saída
+  always_comb begin
+    LED[6] <= aquecedor;
+    LED[7] <= resfriador;
+    SEG[7] <= inconsistencia;
+  end
+
+  //Lógica do sistema
+  always_comb begin
+    aquecedor <= !t1 && !t2; //Se a temperatura estiver abaixo de 15 e 20 graus simultaneamente (SWI[3] = 0 e SWI[4] = 0) o aquecedor (LED[6]) será ativado.
+    resfriador <= t1 && t2; //Se a temperatura estiver igual ou maior que 15 e 20 graus simultaneamente (SWI[3] = 1 e SWI[4] = 1) o resfriador (LED[7]) será ativado.
+    inconsistencia <= !t1 && t2; //Se a temperatura estiver igual ou maior que 20 graus (SWI[4] = 1) e ao mesmo tempo estiver menor que 15 graus (SWI[3] = 0), então o indicador de insconsistência (SEG[7]) será ativado.
+  end
 
 endmodule
