@@ -24,7 +24,7 @@ module top(input  logic clk_2,
 
   always_comb begin
     /*LED <= SWI;*/
-    SEG <= SWI;
+    /*SEG <= SWI;*/
     lcd_WriteData <= SWI;
     lcd_pc <= 'h12;
     lcd_instruction <= 'h34567890;
@@ -43,36 +43,79 @@ module top(input  logic clk_2,
     lcd_a <= {56'h1234567890ABCD, SWI};
     lcd_b <= {SWI, 56'hFEDCBA09876543};
   end
-  
-//--------------------------------------------------------------------------
-// Exercício 1 - FIM DE EXPEDIENTE
-//--------------------------------------------------------------------------
 
-//Declarando variáveis de entrada
-logic noite, paradas, sexta, producao;
+  //---------------------------------------------------------
+  // Exercício X - MODELO DE COMENTÁRIO
+  //---------------------------------------------------------
 
-//Declaração da variável de saída
-logic sirene;
+  //Declarando variáveis de entrada
 
-//Declarando conexões das variáveis de entrada com as chaves
-always_comb begin
-	noite <= SWI[4];
-	paradas <= SWI[5];
-	sexta <= SWI[6];
-	producao <= SWI[7];
-end
+  //Declarando variáveis de saída
 
-//Conexão da saída
-always_comb LED[2] <= sirene;
+  //Conexões de entrada
+
+  //Conexões de saída
+
+  //Lógica do sistema
 
 
-//Lógica do sistema (em lógica combinacional)
-always_comb
-	sirene <= (noite && paradas) || (sexta && producao && paradas);
-/*
-Ou seja, o LED de indice 2 (da direita para a equerda no simulador)
-deverá ser ativado se, e somente se, ocorrer ao menos uma das seguintes
-combinações de switchs ativados: 4 e 5; ou 5, 6 e 7.
-*/
+  //---------------------------------------------------------
+  // Exercício 1 - FIM DE EXPEDIENTE
+  //---------------------------------------------------------
+
+  //Declarando variáveis de entrada
+  logic noite, paradas, sexta, producao;
+
+  //Declaração da variável de saída
+  logic sirene;
+
+  //Declarando conexões das variáveis de entrada com as chaves
+  always_comb begin
+    noite <= SWI[4];
+    paradas <= SWI[5];
+    sexta <= SWI[6];
+    producao <= SWI[7];
+  end
+
+  //Conexão da saída
+  always_comb LED[2] <= sirene;
+
+
+  //Lógica do sistema (em lógica combinacional)
+  always_comb
+    sirene <= (noite && paradas) || (sexta && producao && paradas);
+
+  //Ou seja, o LED de indice 2 (da direita para a equerda no simulador) deverá ser ativado se, e somente se, ocorrer ao menos uma das seguintes combinações de switchs ativados: 4 e 5; ou 5, 6 e 7.
+
+
+  //---------------------------------------------------------
+  // Exercício 2 - UMA AGÊNCIA BANCÁRIA
+  //---------------------------------------------------------
+
+  //Declarando variáveis de entrada
+  logic porta_cofre, relogio, interruptor;
+
+  //Declarando variáveis de saída
+  logic alarme;
+
+  //Conexões de entrada
+  always_comb begin
+    porta_cofre <= SWI[0];
+    relogio <= SWI[1];
+    interruptor <= SWI[2];
+  end
+
+  //Conexões de saída
+  always_comb
+    SEG[0] <= alarme;
+
+  //Lógica do sistema (com estrutura condicional)
+  always_comb
+    if ( (porta_cofre && interruptor) ||
+          (porta_cofre && !relogio) )
+          alarme <= 1;
+    else alarme <= 0;
+
+  //Ou seja, o segmento 0 será ativado se e somente se ao menos uma das seguintes combinações ocorrer: SWI[0] = 1 e SWI[2] = 1; ou SWI[0] = 1 e SWI[1] = 0.
 
 endmodule
