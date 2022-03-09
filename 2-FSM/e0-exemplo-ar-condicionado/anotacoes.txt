@@ -1,0 +1,13 @@
+Estados:
+PINGANDO; FUNCIONAMENTO NORMAL
+
+Informações a serem mantidas durante a execução do programa:
+-Temperatura real;
+-Temperatura desejada;
+-Temperatura está diminuindo;
+-Temperatura está aumentando;
+-Temperatura não aumenta nem diminui;
+-Ciclos de clock desde o reset;
+-Ciclos de clock desde que a temperatura real assumiu 27 graus celsius;
+-Índices das entradas (SWITCHES);
+-Índices das saídas (LED)
