@@ -37,7 +37,7 @@ module top(input  logic clk_2,
         lcd_Branch <= SWI[1];
         lcd_MemtoReg <= SWI[2];
         lcd_RegWrite <= SWI[3];
-        for(i=0; i<NREGS_TOP; i++)
+        for(int i=0; i<NREGS_TOP; i++)
             if(i != NREGS_TOP/2-1) lcd_registrador[i] <= i+i*16;
             else                   lcd_registrador[i] <= ~SWI;
         lcd_a <= {56'h1234567890ABCD, SWI};
@@ -47,19 +47,6 @@ module top(input  logic clk_2,
     //Declarando variáveis
     logic [5:0] entrada;
     logic [3:0] nota;
-    int i;
-
-    //Declarando conexões
-    always_comb begin
-        SEG[0] <= 0;
-        SEG[1] <= 0;
-        SEG[2] <= 0;
-        SEG[3] <= 0;
-        SEG[4] <= 0;
-        SEG[5] <= 0;
-        SEG[6] <= 0;
-        SEG[7] <= 0;
-    end
 
     //Atribuindo valor dos 4 primeiros bits de input para a variavel "entrada"
     always_comb begin
@@ -79,68 +66,68 @@ module top(input  logic clk_2,
         if (SWI[7] == 0) begin
             //Configurando o "0" no display:
             if (entrada == 0)
-                for (i = 0; i < 7; i++)
+                for (int i = 0; i < 7; i++)
                    SEG[i] <= (i != 6);
             
             //Configurando o "1" no display:
             else if (entrada == 1) begin
-                for ( i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 1 || i == 2);
                 end
             end
 
             //Configurando o "2" no display:
             else if (entrada == 2) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 2 && i != 5);
                 end
             end
 
             //Configurando o "3" no display:
             else if (entrada == 3) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 4 && i != 5);
                 end
             end
 
             //Configurando o "4" no display:
             else if (entrada == 4) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 3 && i != 4);
                 end
             end
 
             //Configurando o "5" no display:
             else if (entrada == 5) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 4);
                 end
             end
 
             //Configurando o "6" no display:
             else if (entrada == 6) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1);
                 end
             end
 
             //Configurando o "7" no display:
             else if (entrada == 7) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 0 || i == 1 || i == 2);
                 end
             end
 
             //Configurando o "8" no display:
             else if (entrada == 8) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= 1;
                 end
             end
 
             //Configurando o "9" no display:
             else if (entrada == 9) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 4);
                 end
             end
@@ -152,42 +139,42 @@ module top(input  logic clk_2,
 
             //Configurando o "A" no display:
             else if (entrada == 10) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 3);
                 end
             end
 
             //Configurando o "B" no display:
             else if (entrada == 11) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 1);
                 end
             end
 
             //Configurando o "C" no display:
             else if (entrada == 12) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 2 && i != 6);
                 end
             end
 
             //Configurando o "D" no display:
             else if (entrada == 13) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 5);
                 end
             end
 
             //Configurando o "E" no display:
             else if (entrada == 14) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 2);
                 end
             end
 
             //Configurando o "F" no display:
             else if (entrada == 15) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 2 && i != 3);
                 end
             end
@@ -199,189 +186,189 @@ module top(input  logic clk_2,
 
             //Configurando o "A" no display:
             else if (entrada == 16) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 3);
                 end
             end
 
             //Configurando o "b" no display:
             else if (entrada == 17) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 1);
                 end
             end
 
             //Configurando o "C" no display:
             else if (entrada == 18) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 2 && i != 6);
                 end
             end
 
             //Configurando o "c" no display:
             else if (entrada == 19) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 3 || i == 4 || i == 6);
                 end
             end
 
             //Configurando o "d" no display:
             else if (entrada == 20) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 5);
                 end
             end
 
             //Configurando o "E" no display:
             else if (entrada == 21) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 2);
                 end
             end
 
             //Configurando o "F" no display:
             else if (entrada == 22) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 2 && i != 3);
                 end
             end
 
             //Configurando o "g" no display:
             else if (entrada == 23) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 4);
                 end
             end
 
             //Configurando o "x" no display:
             else if (entrada == 24) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 3);
                 end
             end
 
             //Configurando o "h" no display:
             else if (entrada == 25) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 1 && i != 3);
                 end
             end
 
             //Configurando o "i" no display:
             else if (entrada == 26) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 2);
                 end
             end
 
             //Configurando o "I" no display:
             else if (entrada == 27) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 1 || i == 2);
                 end
             end
 
             //Configurando o "J" no display:
             else if (entrada == 28) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 5 && i != 6);
                 end
             end
 
             //Configurando o "L" no display:
             else if (entrada == 29) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 3 || i == 4 || i == 5);
                 end
             end
 
             //Configurando o "n" no display:
             else if (entrada == 30) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 2 || i == 4 || i == 6);
                 end
             end
 
             //Configurando o "O" no display:
             else if (entrada == 31) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 6);
                 end
             end
 
             //Configurando o "o" no display:
             else if (entrada == 32) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 1 && i != 5);
                 end
             end
 
             //Configurando o "P" no display:
             else if (entrada == 33) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 2 && i != 3);
                 end
             end
 
             //Configurando o "q" no display:
             else if (entrada == 34) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 3 && i != 4);
                 end
             end
 
             //Configurando o "r" no display:
             else if (entrada == 35) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 4 || i == 6);
                 end
             end
 
             //Configurando o "S" no display:
             else if (entrada == 36) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 1 && i != 4);
                 end
             end
 
             //Configurando o "t" no display:
             else if (entrada == 37) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 1 && i != 2);
                 end
             end
 
             //Configurando o "U" no display:
             else if (entrada == 38) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 6);
                 end
             end
 
             //Configurando o "u" no display:
             else if (entrada == 39) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i == 2 || i == 3 || i == 4);
                 end
             end
 
             //Configurando o "y" no display:
             else if (entrada == 40) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 0 && i != 4);
                 end
             end
 
             //Configurando o "°" no display:
             else if (entrada == 41) begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= (i != 2 && i != 3 && i != 4);
                 end
             end
 
             //Desativando o display para qualquer outra entrada
             else begin
-                for (i = 0; i < 7; i++) begin
+                for (int i = 0; i < 7; i++) begin
                     SEG[i] <= 0;
                 end
             end
